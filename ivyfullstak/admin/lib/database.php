@@ -71,6 +71,17 @@ public function insert($query){
     }
  }
   
+ public function insert_r($query){
+  mysqli_set_charset($this->link,'UTF8');
+   $insert_row = $this->link->query($query) or 
+     die($this->link->error.__LINE__);
+   if($insert_row){
+    $r = $this->link->insert_id;
+     return $r;
+   } else {
+     return false;
+    }
+ }
 // Update data
  public function update($query){
   mysqli_set_charset($this->link,'UTF8');

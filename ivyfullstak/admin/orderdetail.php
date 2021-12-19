@@ -9,8 +9,8 @@ include_once "../helper/format.php";
 ?>
 <?php
 $product = new product();
-if (isset($_GET['order_ma'])|| $_GET['order_ma']!=NULL){
-    $order_ma = $_GET['order_ma'];
+if (isset($_GET['order_id'])){
+    $order_id = $_GET['order_id'];
     }
 ?>
         <div class="admin-content-right">
@@ -18,7 +18,7 @@ if (isset($_GET['order_ma'])|| $_GET['order_ma']!=NULL){
                 <table>
                     <tr>
                         <th>Stt</th>
-                        <th>Mã đơn hàng</th>
+                        <th>ID</th>
                         <th>Tên Sản phẩm</th>
                         <th>Ảnh </th>
                         <th>SL</th>
@@ -28,12 +28,12 @@ if (isset($_GET['order_ma'])|| $_GET['order_ma']!=NULL){
                     </tr>
                     <?php
                      $TT = 0;
-               $show_order_detail = $product  -> show_order_detail($order_ma);
+               $show_order_detail = $product  -> show_order_detail($order_id);
                if($show_order_detail){$i=0;while($result = $show_order_detail->fetch_assoc()){$i++;
                 ?>
                     <tr>
                         <td> <?php echo $i ?></td>
-                        <td> Ivy_<?php $ma = substr($result['session_idA'],0,8); echo $ma   ?></td>
+                        <td> <?php echo $result['sanpham_id'];   ?></td>
                         <td> <?php echo $result['sanpham_tieude']?></td>
                         <td> <img style="width:50px" src="../<?php echo $result['sanpham_anh'] ?>" alt=""></td>
                         <td> <?php echo $result['quantitys']  ?></td>

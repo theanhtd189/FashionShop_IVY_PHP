@@ -35,15 +35,21 @@ class Session{
     }
  }
 
-//  public static function checkLogin(){
-//     self::init();
-//     if (self::get("user_login")== true) {
-//    //   header("Location:productlist.php");
-//     }
-//  }
+ public static function checkLogin(){
+    self::init();
+    if (self::get("user_login")== true && self::get('user_id')!=false) {
+        return true;
+    }
+    else
+    return false;
+ }
 
  public static function destroy(){
   session_destroy();
+  setcookie("PHPSESSID", "", 1); 
+session_start();
+
+session_regenerate_id(true);
   header("Location:index.php");
  }
  public static function destroyAdmin(){
@@ -51,5 +57,3 @@ class Session{
    header("Location:login.php");
   }
 }
-?>
-

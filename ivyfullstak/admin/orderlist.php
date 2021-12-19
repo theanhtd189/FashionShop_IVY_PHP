@@ -13,9 +13,8 @@ $product = new product();
 <?php
 if (isset($_GET['status'])){
     $status = $_GET['status'];
-    $session_idA = $_GET['session_idA'];
-    $update_order = $product -> update_order($status,$session_idA);
-
+    $order_id = $_GET['order_id'];
+    echo $update_order = $product -> update_order($status,$order_id);
     }
    
 ?>
@@ -26,7 +25,7 @@ if (isset($_GET['status'])){
                 <table>
                     <tr>
                         <th>Stt</th>
-                        <th>Mã đơn hàng</th>
+                        <!-- <th>Mã đơn hàng</th> -->
                         <th>Ngày đặt hàng</th>
                         <th>Tên</th>
                         <th>Điện thoại</th>
@@ -34,7 +33,7 @@ if (isset($_GET['status'])){
                         <th>Giao hàng</th>
                         <th>Thanh toán</th>
                         <th>Chi tiết đơn hàng</th>   
-                        <th>Tình trạng</th>              
+                        <th>Thao tác</th>              
                         <th>Tùy chỉnh</th>
                     </tr>
                     <?php
@@ -43,15 +42,15 @@ if (isset($_GET['status'])){
                 ?>
                     <tr>
                         <td> <?php echo $i ?></td>
-                        <td> Ivy_<?php $ma = substr($result['session_idA'],0,8); echo $ma   ?></td>
+                        <!-- <td> Ivy_<?php $ma = substr($result['session_idA'],0,8); //echo $ma   ?></td> -->
                         <td> <?php echo $result['order_date']?></td>
                         <td> <?php echo $result['customer_name']?></td>
                         <td> <?php echo $result['customer_phone'] ?></td>
                         <td> <?php echo $result['customer_diachi']  ?>, <?php echo $result['phuong_xa']  ?>, <?php echo $result['quan_huyen']  ?>, <?php echo $result['tinh_tp']  ?></td>
                         <td> <?php echo $result['giaohang']  ?></td>
                         <td> <?php echo $result['thanhtoan']  ?></td>
-                        <td> <a href="orderdetail.php?order_ma=<?php echo $result['session_idA'] ?>">Xem</a></td>            
-                        <td><a style="color:tomato" href="?status=1&session_idA=<?php echo $result['session_idA'] ?>">Đã hoàn thành</a></td>
+                        <td> <a href="orderdetail.php?order_id=<?php echo $result['order_id'] ?>">Xem</a></td>            
+                        <td><a style="color:tomato" href="?status=1&order_id=<?php echo $result['order_id'] ?>">Xác nhận</a></td>
                         <td><a href="orderdelete.php?session_idA=<?php echo $result['session_idA'] ?>" onclick="return confirm('Đơn hàng sẽ bị xóa vĩnh viễn, bạn có chắc muốn tiếp tục không?');">Xóa</a></td>
                     </tr>
                     <?php

@@ -7,9 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $today = date("d/m/Y");
     $deliver_method = $_POST['deliver-method'];
     $method_payment = $_POST['method-payment'];
-	$insert_payment = $index ->insert_payment($session_idA,$deliver_method,$method_payment,$today );
-
-
+    $user_id = Session::get('user_id');
+    $order_id = Session::get('order_id');
+	$insert_payment = $index ->insert_payment($session_idA,$deliver_method,$method_payment,$today,$user_id,$order_id);
 }
 ?>
 

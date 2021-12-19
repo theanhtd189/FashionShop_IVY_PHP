@@ -793,18 +793,24 @@ a{
     background-color:#fff;
     border: 1px solid black;
     margin-right: 20px;
+    transition: .4s;
 }
 .cart-content-right-button button:first-child:hover {
-    background-color:#dddd;
+    background-color: #6260e0dd;
+    color: white;
+    transition: .4s;
+    border:1px solid #6260e0dd;
 }
 .cart-content-right-button button:last-child {
     background-color: black;
     color: #fff;
     border: none;
     border: 1px solid black;
+    transition: .4s;
 }
 .cart-content-right-button button:last-child:hover {
-    background-color:#dddd;
+    background-color:rgb(255, 255, 255);
+    transition: .4s;
     color: #333;
    
 }

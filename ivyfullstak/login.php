@@ -3,6 +3,10 @@ include 'header.php';
 include_once 'class/user_class.php';
 $user = new user();
 $msg="";
+$r = isset($_GET['r'])?($_GET['r']=='true'?true:false):false;
+if(Session::checkLogin()){
+    header('location: profile.php');
+}
 
 if(isset($_REQUEST['dangnhap'])){
     $u = isset($_POST['email'])?$_POST['email']:"default";
@@ -12,6 +16,9 @@ if(isset($_REQUEST['dangnhap'])){
         $i = mysqli_fetch_array($stt);
         Session::set('user_id',$i['user_id']);
         Session::set('user_login',true);
+        if($r)
+            header('location: delivery.php');
+        else
         header('Location: profile.php?user_id='.$i['user_id']."'");
     }
     else

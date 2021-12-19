@@ -115,6 +115,12 @@ class product
         $result = $this->db->select($query);
         return $result;
     }
+    public function GetSoLuongSPKho($sanpham_id)
+    {
+        $query = "SELECT * FROM tbl_sanpham WHERE sanpham_id = '$sanpham_id'";
+        $result = $this->db->select($query);
+        return mysqli_fetch_array($result)['sanpham_soluong'];
+    }
     public function get_anh($sanpham_id)
     {
         $query = "SELECT tbl_sanpham_anh.*, tbl_sanpham.sanpham_ma
@@ -290,65 +296,99 @@ class product
     public function show_order()
     {
         $query = "SELECT tbl_order.*, tbl_payment.*,tbl_diachi.*
-    FROM tbl_order INNER JOIN tbl_payment ON tbl_order.session_idA = tbl_payment.session_idA
+    FROM tbl_order INNER JOIN tbl_payment ON tbl_order.order_id = tbl_payment.order_id
     INNER JOIN tbl_diachi ON tbl_order.customer_xa = tbl_diachi.ma_px
     WHERE tbl_payment.statusA = 0
-    ORDER BY tbl_payment.payment_id DESC   ";
+    ORDER BY tbl_payment.order_date ASC";
         $result = $this->db->selectdc($query);
         return $result;
     }
 
     public function show_order_detail($order_ma)
     {
-        $query = "SELECT * FROM tbl_carta WHERE session_idA = '$order_ma' ORDER BY carta_id DESC";
+        $query = "SELECT * FROM tbl_orderitems WHERE order_id = '$order_ma' ORDER BY id DESC";
         $result = $this->db->select($query);
         return $result;
     }
     public function show_order_done()
     {
         $query = "SELECT tbl_order.*, tbl_payment.*,tbl_diachi.*
-    FROM tbl_order INNER JOIN tbl_payment ON tbl_order.session_idA = tbl_payment.session_idA
+    FROM tbl_order INNER JOIN tbl_payment ON tbl_order.order_id = tbl_payment.order_id
     INNER JOIN tbl_diachi ON tbl_order.customer_xa = tbl_diachi.ma_px
     WHERE tbl_payment.statusA = 1
-    ORDER BY tbl_payment.payment_id DESC   ";
+    ORDER BY tbl_payment.payment_id DESC";
         $result = $this->db->select($query);
         return $result;
     }
-    public function update_order($status, $session_idA)
+
+    //xác nhận đơn hàng
+    public function update_order($status, $order_id)
     {
-        $query = "UPDATE tbl_payment SET statusA = '$status' WHERE session_idA = '$session_idA'";
+        $query = "UPDATE tbl_payment SET statusA = '$status' WHERE order_id = '$order_id'";
+        $soluong = "SELECT i.order_id,sanpham_id as id,sanpham_tieude as ten, sanpham_gia as gia, SUM(quantitys) as soluong,SUM(quantitys)*sanpham_gia as tien
+        FROM 
+        `tbl_orderitems` i, tbl_payment p
+        WHERE i.order_id=p.order_id and i.order_id='$order_id'
+         group by sanpham_id,i.order_id";
+        $e = $this->db->select($soluong);
+        if($status==1 && $e!=false){
+            if(mysqli_num_rows($e))
+            while($row = mysqli_fetch_array($e)){
+                $id_sp = $row['id'];
+                $sl_ban = $row['soluong'];
+                $sl_kho = $this->GetSoLuongSPKho($id_sp);
+                $this->UpdateSoluongSP($id_sp,$sl_kho-$sl_ban); 
+            }
+        }
+        else
+        if($status==0 && $e!=false)
+        {
+            if(mysqli_num_rows($e))
+            while($row = mysqli_fetch_array($e)){
+                $id_sp = $row['id'];
+                $sl_ban = $row['soluong'];
+                $sl_kho = $this->GetSoLuongSPKho($id_sp);
+                $this->UpdateSoluongSP($id_sp,$sl_kho+$sl_ban);               
+            }
+        }
+        else
+        return var_dump($e);
         $result = $this->db->update($query);
-        // header('Location:orderlist.php');
-        return $result;
+        //header('Location:orderlist.php');
     }
+
     public function show_orderAll()
     {
         $query = "SELECT tbl_order.*, tbl_payment.*,tbl_diachi.*
-    FROM tbl_order INNER JOIN tbl_payment ON tbl_order.session_idA = tbl_payment.session_idA
+    FROM tbl_order INNER JOIN tbl_payment ON tbl_order.order_id = tbl_payment.order_id
     INNER JOIN tbl_diachi ON tbl_order.customer_xa = tbl_diachi.ma_px
     ORDER BY tbl_payment.payment_id DESC   ";
         $result = $this->db->select($query);
         return $result;
     }
-    public function delete_payment($session_idA)
+    public function delete_payment($order_id)
     {
-        $query = "DELETE  FROM tbl_payment WHERE session_idA = '$session_idA'";
+        $query = "DELETE  FROM tbl_payment WHERE order_id = '$order_id'";
         $result = $this->db->delete($query);
         return $result;
     }
-    public function delete_order($session_idA)
+    public function delete_order($order_id)
     {
-        $query = "DELETE  FROM tbl_order WHERE session_idA = '$session_idA'";
+        $query = "DELETE  FROM tbl_order WHERE order_id = '$order_id'";
         $result = $this->db->delete($query);
         return $result;
     }
-    public function delete_cart($session_idA)
+    public function delete_cart($order_id)
     {
-        $query = "DELETE  FROM tbl_carta WHERE session_idA = '$session_idA'";
+        $query = "DELETE  FROM tbl_orderitems WHERE order_id = '$order_id'";
         $result = $this->db->delete($query);
         return $result;
     }
-    
+    public function UpdateSoluongSP($id_sp,$sl){
+        $q="UPDATE `tbl_sanpham` SET `sanpham_soluong`='$sl' WHERE sanpham_id='$id_sp'";
+        return $this->db->update($q);
+    }
+
 }
 
 

@@ -11,7 +11,7 @@ $current_user = mysqli_fetch_array($user->GetUser($current_id));
 
 <section class="category" style="padding: 70px 0 0;">
     <div class="container mgbt">
-        <form class="profile_tab" method="post" action="">
+        <form class="profile_tab" method="post" action="" autocomplete="off">
             <h3 class="heading-tab">Thông tin tài khoản</h3>
             <div class="flex justify-center">
             <div class="tb_1">

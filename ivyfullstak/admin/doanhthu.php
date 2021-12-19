@@ -21,23 +21,27 @@ $list = $f->ThongKeDoanhThu();
             </tr>
             <?php
             if ($list != false) {
-                $tong = 0;
+                $tong = 0;$tsp=0;
                 while ($list_r = mysqli_fetch_array($list)) {
                     $tong = $tong + $list_r['soluong']*$list_r['gia'];
+                    $tsp= $tsp + $list_r['soluong'];
             ?>
                     <tr>
                         <td><?php echo $list_r['id'] ?></td>
                         <td><?php echo $list_r['ten'] ?></td>
                         <td><?php echo $list_r['gia'] ?> VND</td>
                         <td><?php echo $list_r['soluong'] ?></td>
-                        <td><span style="color:red"><?php echo $list_r['soluong']*$list_r['gia'] ?> VND</span></td>
+                        <td><span style="color:red"><?php 
+                        echo $list_r['soluong']*$list_r['gia'];
+                        ?> VND</span></td>
                     </tr>
             <?php
                 }
             }
             ?>
             <tr>
-                <td colspan="4">Tổng doanh thu</td>
+                <td colspan="3">Tổng doanh thu</td>
+                <td><?php echo $tsp;?> Sản phẩm</td>
                 <td><?php echo $tong?> VND</td>
             </tr>
         </table>

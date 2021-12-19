@@ -187,10 +187,12 @@ $(document).ready(function(){
                     url: "ajax/cart_ajax.php",
                     method: "POST",
                     data: {session_id:se,sanpham_id:sp,sanpham_tieude:x,sanpham_anh:y,sanpham_gia:z,color_anh:c,quantitys:q,sanpham_size:s},
-                    success:function(data){}
+                    success:function(data){
+                        alert(data)
+                    }
                 })
                 // window.location.replace("cart.php");
-                $(location).attr('href','cart.php')
+                //$(location).attr('href','cart.php')
              
         
             

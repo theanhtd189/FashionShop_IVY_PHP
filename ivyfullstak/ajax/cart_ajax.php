@@ -13,7 +13,20 @@ if(isset($_POST['sanpham_anh'])){
     $color_anh = $_POST['color_anh'];
     $quantitys = $_POST['quantitys'];
     $sanpham_size = $_POST['sanpham_size'];
-    $insert_cart = $index -> insert_cart($sanpham_anh,$session_idA,$sanpham_id,$sanpham_tieude,$sanpham_gia,$color_anh,$quantitys,$sanpham_size);
+
+    $slkho = $index->CheckSLKho($sanpham_id);
+    if($slkho==0){
+        echo 'Sản phẩm này đã hết hàng, vui lòng quay lại sau';
+    }
+    else
+    if($quantitys>$slkho){
+        echo 'Số lượng trong kho không đủ';
+    }
+    else
+    {
+        $insert_cart = $index -> insert_cart($sanpham_anh,$session_idA,$sanpham_id,$sanpham_tieude,$sanpham_gia,$color_anh,$quantitys,$sanpham_size);
+        echo 'Đã thêm vào giỏ hàng';
+    }
     
 }
 else {

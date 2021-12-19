@@ -4,9 +4,9 @@ include "header.php";
 ?>
 <?php
 
-if (isset($_GET['cart_id'])|| $_GET['cart_id']!=NULL){
-    $cart_id = $_GET['cart_id'];
+if (isset($_GET['id'])|| $_GET['id']!=NULL){
+    $id = $_GET['id'];
     }
-    $delete_cart = $index -> delete_cart($cart_id);
+    $delete_cart = $index -> delete_cart($id);
     header('Location:cart.php?');
 ?>

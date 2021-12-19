@@ -61,7 +61,7 @@ if(!isset($_GET['id'])){
                                 <td><p><?php echo $result['sanpham_size'] ?></p></td>
                                 <td><span><?php echo $result['quantitys'] ?></span></td>
                                 <td><p><?php $resultC = number_format($result['sanpham_gia']); echo $resultC ?><sup>đ</sup></p></td>
-                                <td><a href="cartdelete.php?cart_id=<?php echo $result['cart_id'] ?>"><span>x</span></a></td>
+                                <td><a href="cartdelete.php?id=<?php echo $result['id'] ?>"><span>x</span></a></td>
                                 <?php $a = (int)$result['sanpham_gia']; $b = (int)$result['quantitys']; $TTA = $a*$b;   ?>
                             </tr>
                            <?php
@@ -115,10 +115,10 @@ if(!isset($_GET['id'])){
                         <button>TIẾP TỤC MUA SẮM</button>
                         <a href="delivery.php"><button>THANH TOÁN</button></a>
                     </div>
-                    <div class="cart-content-right-dangnhap">
+                    <!-- <div class="cart-content-right-dangnhap">
                         <p>TÀI KHOẢN JULLY</p> <br>
                         <p>Hãy <a href="">đăng nhập</a> tài khoản của bạn để tích điểm thành viên.</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <?php 
