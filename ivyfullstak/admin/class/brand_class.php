@@ -18,8 +18,9 @@ class brand
    public function insert_brand($danhmuc_id,$loaisanpham_name){
             $query = "INSERT INTO tbl_loaisanpham (danhmuc_id, loaisanpham_ten) VALUES ('$danhmuc_id','$loaisanpham_name')";
             $result = $this ->db ->insert($query);
-            header('Location:brandlist.php');
+
             return $result;
+            
                
              
        }

@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $customer_diachi
     );
     Session::set('order_id', $insert_order);
+    //echo $insert_order;
     header('Location:payment.php');
 }
 ?>

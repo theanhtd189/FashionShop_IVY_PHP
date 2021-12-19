@@ -382,22 +382,12 @@ class index
         $customer_xa,
         $customer_diachi
     ) {
-        $query = "SELECT * FROM tbl_order WHERE session_idA = '$session_idA' ORDER BY order_id DESC";
-        $result = $this->db->select($query);
         $query = "INSERT INTO tbl_order (session_idA,loaikhach,customer_name,customer_phone,customer_tinh,customer_huyen,customer_xa,customer_diachi) VALUES 
             ('$session_idA','$loaikhach','$customer_name','$customer_phone','$customer_tinh','$customer_huyen','$customer_xa','$customer_diachi')";
         $result = $this->db->insert_r($query);
         //header('Location:payment.php');   
         return $result;
     }
-    // public function insert_payment($session_idA, $deliver_method, $method_payment, $today, $user_id, $order_id)
-    // {
-    //     $query = "INSERT INTO tbl_payment (session_idA,giaohang,thanhtoan,order_date,user_id,order_id) VALUES 
-    //     ('$session_idA','$deliver_method','$method_payment','$today',$user_id,$order_id)";
-    //     $result = $this->db->insert($query);
-    //     header('Location:success.php');
-    //     return $result;
-    // }
     public function insert_payment($session_idA, $deliver_method, $method_payment, $today, $user_id, $order_id)
     {
             $query = "SELECT * FROM tbl_cart WHERE session_idA = '$session_idA' ORDER BY id DESC";
@@ -424,30 +414,29 @@ class index
                 }
             }
             $query = "INSERT INTO tbl_payment (giaohang,thanhtoan,order_date,user_id,order_id) VALUES 
-            ('$deliver_method','$method_payment','$today',$user_id,$order_id)";
-            $result = $this->db->insert($query);
-            header('Location:success.php');
+            ('$deliver_method','$method_payment','$today','$user_id','$order_id')";
+            $result = $this->db->insert_r($query);
             return $result;
 
     }
-    public function show_carta($session_id)
+    public function show_carta($id)
     {
-        $query = "SELECT * FROM tbl_orderitems WHERE session_idA = '$session_id' ORDER BY id DESC";
+        $query = "SELECT * FROM tbl_orderitems WHERE order_id = '$id' ORDER BY id DESC";
         $result = $this->db->select($query);
         return $result;
     }
-    public function show_order($session_id)
+    public function show_order($id)
     {
         $query = "SELECT tbl_order.*, tbl_diachi.*
         FROM tbl_order INNER JOIN tbl_diachi ON tbl_order.customer_xa = tbl_diachi.ma_px
-        WHERE tbl_order.session_idA = '$session_id'
+        WHERE tbl_order.order_id = '$id'
         ORDER BY tbl_order.order_id DESC LIMIT 1  ";
         $result = $this->db->select($query);
         return $result;
     }
-    public function show_payment($session_id)
+    public function show_payment($id)
     {
-        $query = "SELECT * FROM tbl_payment WHERE session_idA = '$session_id' ORDER BY payment_id DESC LIMIT 1";
+        $query = "SELECT * FROM tbl_payment WHERE payment_id = '$id' ORDER BY payment_id DESC LIMIT 1";
         $result = $this->db->select($query);
         return $result;
     }

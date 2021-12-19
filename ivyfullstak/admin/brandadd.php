@@ -1,5 +1,5 @@
 <?php
-include "header.php";
+include_once "header.php";
 include "leftside.php";
 // include "class/category_class.php";
 // define('__ROOT__', dirname(dirname(__FILE__))); 

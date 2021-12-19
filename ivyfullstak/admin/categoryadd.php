@@ -10,7 +10,7 @@ $category= new category;
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $danhmuc_ten = $_POST['danhmuc_ten'];
 	$insert_category = $category ->insert_category($danhmuc_ten);
-
+    header('Location:categorylist.php');
 }
 ?>
 <div class="admin-content-right">

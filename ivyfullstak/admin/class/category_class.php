@@ -18,7 +18,7 @@ class category
    public function insert_category($danhmuc_ten){
             $query = "INSERT INTO tbl_danhmuc (danhmuc_ten) VALUES ('$danhmuc_ten')";
             $result = $this ->db ->insert($query);
-            header('Location:categorylist.php');
+
             return $result;
                
              
