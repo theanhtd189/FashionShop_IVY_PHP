@@ -1,7 +1,6 @@
 <?php
-if(isset($_GET['admin_id'])){
+if(isset($_GET['admin_id']))
     Session::destroyAdmin();
-}
 ?>
 <section class="admin-content row space-between">
         <div class="admin-content-left">

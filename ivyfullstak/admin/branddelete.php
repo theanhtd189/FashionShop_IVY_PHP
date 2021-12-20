@@ -11,5 +11,9 @@ if (isset($_GET['loaisanpham_id'])|| $_GET['loaisanpham_id']!=NULL){
     $loaisanpham_id = $_GET['loaisanpham_id'];
     }
     $delete_brand = $brand -> delete_brand($loaisanpham_id);
-    header('Location:brandlist.php');
+    if($delete_brand){
+        echo '<script>alert("Thành công");window.location.href="brandlist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 ?>

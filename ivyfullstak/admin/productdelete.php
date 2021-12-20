@@ -15,5 +15,9 @@ else {$sanpham_id = $_GET['sanpham_id'];
     }
     $delete_product = $product  -> delete_product($sanpham_id);
     $delete_product_anh =  $product -> delete_product_anh($sanpham_id);
-    header('Location:productlist.php');
+    if($delete_product){
+        echo '<script>alert("Thành công");window.location.href="productlist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 ?>

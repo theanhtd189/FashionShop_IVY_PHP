@@ -17,7 +17,11 @@ if (isset($_GET['danhmuc_id'])|| $_GET['danhmuc_id']!=NULL){
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $danhmuc_ten = $_POST['danhmuc_ten'];
 	$update_category = $category->update_category($danhmuc_ten,$danhmuc_id);
-
+    if($update_category){
+        echo '<script>alert("Thành công");window.location.href="categorylist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 }
 ?>
         <div class="admin-content-right">

@@ -17,7 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $upload_image = "uploads/".$color_anh;
     move_uploaded_file( $file_temp,$upload_image);
 	$insert_color = $brand ->insert_color($color_ten,$color_anh);
-
+    if($insert_color){
+        echo '<script>alert("Thành công");window.location.href="colorlist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 }
 ?>
         <div class="admin-content-right">

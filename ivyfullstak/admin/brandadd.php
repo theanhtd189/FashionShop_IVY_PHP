@@ -12,7 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $loaisanpham_name = $_POST['loaisanpham_name'];
     $danhmuc_id = $_POST['danhmuc_id'];
 	$insert_brand = $brand ->insert_brand($danhmuc_id,$loaisanpham_name);
-
+    if($insert_brand){
+        echo '<script>alert("Thành công");window.location.href="brandlist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 }
 ?>
         <div class="admin-content-right">

@@ -17,7 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $upload_image = "uploads/".$sp_anh;
     move_uploaded_file( $file_temp,$upload_image);
 	$insert_anhsp =$product ->insert_anhsp($sanpham_id,$sp_anh);
-
+    if($insert_anhsp){
+        echo '<script>alert("Thành công");window.location.href="anhsanphamlists.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 }
 ?>
         <div class="admin-content-right">

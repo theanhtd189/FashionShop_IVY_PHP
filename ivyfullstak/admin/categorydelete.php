@@ -11,5 +11,8 @@ if (isset($_GET['danhmuc_id'])|| $_GET['danhmuc_id']!=NULL){
     $danhmuc_id = $_GET['danhmuc_id'];
     }
     $delete_category = $category -> delete_category($danhmuc_id);
-    header('Location:categorylist.php');
+    if($delete_category)
+    echo '<script>alert("Thành công");window.location.href="categorylist.php"</script>';
+    else
+    echo '<script>Lỗi</script>';
 ?>

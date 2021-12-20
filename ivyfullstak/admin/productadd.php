@@ -11,7 +11,11 @@ $product = new product();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     // var_dump($_POST);
 	$insert_product = $product ->insert_product($_POST,$_FILES);
-    header('Location:brandlist.php');
+    if($insert_product){
+        echo '<script>alert("Thành công");window.location.href="productlist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 
 }
 

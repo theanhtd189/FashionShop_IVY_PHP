@@ -11,7 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $sanpham_id = $_POST['sanpham_id'];
     $sanpham_size = $_POST['sanpham_size'];
     $insert_sizesp =$product ->insert_sizesp($sanpham_id,$sanpham_size);
-    
+    if($insert_sizesp){
+        echo '<script>alert("Thành công");window.location.href="sizesanphamlists.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 }
 ?>
         <div class="admin-content-right">

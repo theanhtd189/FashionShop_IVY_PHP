@@ -18,7 +18,11 @@ if (isset($_GET['sanpham_id'])|| $_GET['sanpham_id']!=NULL){
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 	$update_product = $product ->update_product($_POST,$_FILES,$sanpham_id );
-    // header('Location:brandlist.php');
+    if($update_product){
+        echo '<script>alert("Thành công");window.location.href="productlist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 }
 ?>
  <div class="admin-content-right">

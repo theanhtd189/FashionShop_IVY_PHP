@@ -19,14 +19,13 @@ class product
     {
         $query = "INSERT INTO tbl_sanpham_anh (sanpham_id,sanpham_anh) VALUES ('$sanpham_id','$sp_anh')";
         $result = $this->db->insert($query);
-        header('Location:anhsanphamlists.php');
         return $result;
     }
     public function insert_sizesp($sanpham_id, $sanpham_size)
     {
         $query = "INSERT INTO tbl_sanpham_size (sanpham_id,sanpham_size) VALUES ('$sanpham_id','$sanpham_size')";
         $result = $this->db->insert($query);
-        header('Location:sizesanphamlists.php');
+        //header('Location:sizesanphamlists.php');
         return $result;
     }
     public function insert_product($data, $file)
@@ -71,7 +70,7 @@ class product
                 $result = $this->db->insert($query);
             }
         }
-        header('Location:productlist.php');
+        //header('Location:productlist.php');
         return $result;
     }
     // $alert = "<span class = 'alert-style'>Thành công</span> "; return $alert;
@@ -203,7 +202,7 @@ class product
                     $result = $this->db->insert($query);
                 }
             }
-            header('Location:productlist.php');
+            //header('Location:productlist.php');
             return $result;
         } else {
             $query = "UPDATE tbl_sanpham SET                            
@@ -217,7 +216,7 @@ class product
                 sanpham_baoquan = '$sanpham_baoquan'
                 WHERE sanpham_id = '$sanpham_id'";
             $result = $this->db->update($query);
-            header('Location:productlist.php');
+            //header('Location:productlist.php');
             return $result;
         }
     }

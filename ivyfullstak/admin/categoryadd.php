@@ -10,7 +10,11 @@ $category= new category;
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $danhmuc_ten = $_POST['danhmuc_ten'];
 	$insert_category = $category ->insert_category($danhmuc_ten);
-    header('Location:categorylist.php');
+    if($insert_category){
+        echo '<script>alert("Thành công");window.location.href="categorylist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 }
 ?>
 <div class="admin-content-right">

@@ -14,7 +14,7 @@ $product = new product();
 if (isset($_GET['status'])){
     $status = $_GET['status'];
     $order_id = $_GET['order_id'];
-    echo $update_order = $product -> update_order($status,$order_id);
+    $update_order = $product -> update_order($status,$order_id);
     }
    
 ?>

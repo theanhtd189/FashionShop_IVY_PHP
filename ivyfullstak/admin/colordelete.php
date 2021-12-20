@@ -11,5 +11,9 @@ if (isset($_GET['color_id'])|| $_GET['color_id']!=NULL){
     $color_id = $_GET['color_id'];
     }
     $delete_color = $brand -> delete_color($color_id);
-    header('Location:colorlist.php');
+    if($delete_color){
+        echo '<script>alert("Thành công");window.location.href="colorlist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 ?>

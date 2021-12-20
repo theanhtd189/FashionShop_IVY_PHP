@@ -19,7 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $loaisanpham_ten = $_POST['loaisanpham_ten'];
     $danhmuc_id = $_POST['danhmuc_id'];
 	$update_brand = $brand->update_brand($loaisanpham_ten,$danhmuc_id,$loaisanpham_id);
-
+    if($update_brand){
+        echo '<script>alert("Thành công");window.location.href="brandlist.php"</script>';
+    }
+    else
+        echo '<script>Alert("Lỗi")</script>';
 }
 ?>
         <div class="admin-content-right">

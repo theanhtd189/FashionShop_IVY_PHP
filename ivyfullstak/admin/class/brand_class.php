@@ -18,16 +18,12 @@ class brand
    public function insert_brand($danhmuc_id,$loaisanpham_name){
             $query = "INSERT INTO tbl_loaisanpham (danhmuc_id, loaisanpham_ten) VALUES ('$danhmuc_id','$loaisanpham_name')";
             $result = $this ->db ->insert($query);
-
             return $result;
-            
-               
-             
        }
  public function insert_color($color_ten,$color_anh) {
     $query = "INSERT INTO tbl_color (color_ten, color_anh) VALUES ('$color_ten','$color_anh')";
     $result = $this ->db ->insert($query);
-    header('Location:brandlist.php');
+    //header('Location:brandlist.php');
     return $result;
  }
    public function show_brand(){
@@ -55,13 +51,13 @@ class brand
    public function update_brand($loaisanpham_ten,$danhmuc_id,$loaisanpham_id) {
                $query = "UPDATE tbl_loaisanpham SET danhmuc_id = '$danhmuc_id', loaisanpham_ten = '$loaisanpham_ten' WHERE loaisanpham_id = '$loaisanpham_id'";
                $result = $this ->db ->update($query);
-               header('Location:brandlist.php');
+               //header('Location:brandlist.php');
                return $result;
    }
    public function update_color($color_ten,$color_anh,$color_id){
             $query = "UPDATE tbl_color SET color_ten = '$color_ten', color_anh = '$color_anh' WHERE color_id = '$color_id'";
             $result = $this ->db ->update($query);
-            header('Location:colorlist.php');
+            //header('Location:colorlist.php');
             return $result;
    }
    public function delete_brand($loaisanpham_id){
