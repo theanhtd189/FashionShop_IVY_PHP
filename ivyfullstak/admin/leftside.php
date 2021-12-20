@@ -15,6 +15,11 @@ if(isset($_GET['admin_id']))
                         <li><a href="memberlist.php?type=admin">Quản trị viên</a></li>
                     </ul>
                 </li>
+                <li><a href="#"><img style="width:30px" src="icon/note.svg" alt="">Kho sản phẩm</a>
+                    <ul>
+                        <li><a href="kho.php">Nhập kho</a></li>
+                    </ul>
+                </li>
                 <li><a href="#"><img style="width:30px" src="icon/note.svg" alt="">Thống kê</a>
                     <ul>
                         <li><a href="sanphamtonkho.php?loai=con">Sản phẩm tồn kho</a></li>

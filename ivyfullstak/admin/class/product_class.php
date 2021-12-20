@@ -220,10 +220,14 @@ class product
             return $result;
         }
     }
-
-
-
-
+    public function NhapKho($id_sp,$sl){
+    $q = "UPDATE `tbl_sanpham` SET `sanpham_soluong`=sanpham_soluong+'$sl' WHERE sanpham_id='$id_sp'";
+    return $this->db->update($q);
+    }
+    public function GetDanhSachSP(){
+        $q = "SELECT sanpham_id as id, sanpham_tieude as ten FROM `tbl_sanpham` ORDER BY `sanpham_id` ASC";
+        return $this->db->selectdc($q);
+    }
     public function delete_product($sanpham_id)
     {
         $query = "DELETE  FROM tbl_sanpham WHERE sanpham_id = '$sanpham_id'";
